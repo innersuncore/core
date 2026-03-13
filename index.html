@@ -256,39 +256,34 @@
 </head>
 <body>
 
-<div class="header">
-  <span class="header-title">CORE™</span>
-
-</div>
-
 <div class="main">
 
   <div class="controls">
     <p class="section-label" style="margin-bottom:16px;">inputs — drag to update</p>
     <div class="control-grid">
       <div class="control">
-        <label>RRP <span id="rrp-out">£800</span></label>
-        <input type="range" min="400" max="1200" step="50" value="800" id="rrp">
+        <label>RRP <span id="rrp-out">£750</span></label>
+        <input type="range" min="400" max="1200" step="50" value="750" id="rrp">
       </div>
       <div class="control">
-        <label>Production cost <span id="prod-out">£200</span></label>
-        <input type="range" min="80" max="400" step="10" value="200" id="prod">
+        <label>Production cost <span id="prod-out">£250</span></label>
+        <input type="range" min="80" max="400" step="10" value="250" id="prod">
       </div>
       <div class="control">
-        <label>Marketing / unit <span id="mkt-out">£90</span></label>
-        <input type="range" min="20" max="200" step="5" value="90" id="mkt">
+        <label>Marketing / unit <span id="mkt-out">£50</span></label>
+        <input type="range" min="20" max="200" step="5" value="50" id="mkt">
       </div>
       <div class="control">
         <label>Units sold <span id="units-out">150</span></label>
         <input type="range" min="10" max="600" step="10" value="150" id="units">
       </div>
       <div class="control">
-        <label>Packaging + hallmark + freight <span id="pkg-out">£27</span></label>
-        <input type="range" min="5" max="80" step="1" value="27" id="pkg">
+        <label>Packaging + hallmark + freight <span id="pkg-out">£30</span></label>
+        <input type="range" min="5" max="80" step="1" value="30" id="pkg">
       </div>
       <div class="control">
-        <label>Shipping + payment <span id="ship-out">£62</span></label>
-        <input type="range" min="10" max="150" step="1" value="62" id="ship">
+        <label>Shipping + payment <span id="ship-out">£40</span></label>
+        <input type="range" min="10" max="150" step="1" value="40" id="ship">
       </div>
     </div>
   </div>
@@ -336,21 +331,21 @@
       <div id="breakdown"></div>
     </div>
     <div class="card">
-      <p class="section-label" style="margin-bottom:14px;">gross margin vs 80% target</p>
+      <p class="section-label" style="margin-bottom:14px;">gross margin vs 70% target</p>
       <div class="gm-display">
         <span class="gm-big" id="gm-big">72.0%</span>
-        <span class="gm-label">vs 80% target</span>
+        <span class="gm-label">vs 70% target</span>
       </div>
       <div class="progress-bg">
         <div class="progress-fill" id="gm-bar" style="width:90%;"></div>
       </div>
-      <p class="gm-note" id="gm-note">Production needs to fall to £160 to hit 80% at £800 RRP.</p>
+      <p class="gm-note" id="gm-note">Production needs to fall to £160 to hit 70% at £800 RRP.</p>
 
       <div class="fixed-section">
         <p class="section-label" style="margin-bottom:10px;">fixed costs</p>
         <p style="font-size:11px; color:var(--text-tertiary); margin-bottom:10px;">Annual recurring</p>
         <div class="breakdown-row"><span class="breakdown-label">Shopify + apps</span><span>£480</span></div>
-        <div class="breakdown-row"><span class="breakdown-label">Virtual office (Bloomsbury)</span><span>£1,176</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Virtual office</span><span>£1,176</span></div>
         <div class="breakdown-row"><span class="breakdown-label">Overhead buffer</span><span>£1,800</span></div>
         <p style="font-size:11px; color:var(--text-tertiary); margin: 10px 0;">One-off (design)</p>
         <div class="breakdown-row"><span class="breakdown-label">3D designer</span><span>£680</span></div>
@@ -423,13 +418,13 @@ function update() {
     wb.style.display = 'none';
   }
 
-  const gmPct = Math.min(r.gm / 80 * 100, 100);
+  const gmPct = Math.min(r.gm / 70 * 100, 100);
   document.getElementById('gm-big').textContent = fmtPct(r.gm);
   document.getElementById('gm-bar').style.width = gmPct.toFixed(0) + '%';
   const prodFor80 = Math.round(rrp * 0.2 - pkg);
-  document.getElementById('gm-note').textContent = r.gm >= 80
+  document.getElementById('gm-note').textContent = r.gm >= 70
     ? 'Target achieved at current settings.'
-    : 'Production needs to fall to £' + prodFor80 + ' to hit 80% at £' + rrp + ' RRP.';
+    : 'Production needs to fall to £' + prodFor80 + ' to hit 70% at £' + rrp + ' RRP.';
 
   const items = [
     { label: 'Production', val: prod },
@@ -467,7 +462,7 @@ window.addEventListener('load', () => {
   const tickColor = isDark ? '#6b6b67' : '#888780';
 
   const vols = [20,40,60,80,100,150,200,250,350,500];
-  const rrp = 800, prod = 200, mkt = 90, pkg = 27, ship = 62;
+  const rrp = 750, prod = 250, mkt = 50, pkg = 30, ship = 40;
   const netLine = vols.map(u => Math.round(calc(rrp, prod, mkt, u, pkg, ship).netTotal));
   const revLine = vols.map(u => Math.round(rrp * u));
 
