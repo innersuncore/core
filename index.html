@@ -288,7 +288,13 @@
     </div>
   </div>
 
-  <p class="section-label">summary</p>
+  <div style="display:flex; align-items:center; gap:12px; margin-top:12px;">
+    <label style="font-size:12px; color:var(--text-secondary);">VAT registered (20%)</label>
+    <input type="checkbox" id="vat-toggle" style="width:16px; height:16px; cursor:pointer; accent-color:var(--gold);">
+    <span style="font-size:11px; color:var(--text-tertiary);" id="vat-note">Not registered — RRP is your full revenue</span>
+  </div>
+
+  <p class="section-label" style="margin-top:1.5rem;">summary</p>
   <div class="metric-grid">
     <div class="metric">
       <p class="metric-label">Revenue</p>
@@ -361,14 +367,16 @@
 </div>
 
 <script>
-const FIXED_ANNUAL = (40 + 98 + 150) * 12 + 680 + 5600; // design: 5 bracelet designs only (rings not started)
+const FIXED_ANNUAL = (40 + 98 + 150) * 12 + 680 + 5600;
+const VAT_RATE = 0.20; // design: 5 bracelet designs only (rings not started)
 
 function fmt(n) { return '£' + Math.round(n).toLocaleString('en-GB'); }
 function fmtPct(n) { return n.toFixed(1) + '%'; }
 
-function calc(rrp, prod, mkt, units, pkg, ship) {
+function calc(rrp, prod, mkt, units, pkg, ship, vatReg) {
+  const exVat = vatReg ? rrp / (1 + VAT_RATE) : rrp;
   const cogs = prod + pkg;
-  const gp = rrp - cogs;
+  const gp = exVat - cogs;
   const gm = gp / rrp * 100;
   const varCost = ship + mkt;
   const fixedPerUnit = FIXED_ANNUAL / units;
@@ -376,7 +384,7 @@ function calc(rrp, prod, mkt, units, pkg, ship) {
   const netTotal = netPerUnit * units;
   const nm = netTotal / (rrp * units) * 100;
   const breakeven = FIXED_ANNUAL / (gp - varCost);
-  return { cogs, gp, gm, varCost, fixedPerUnit, netPerUnit, netTotal, nm, breakeven, rev: rrp * units };
+  return { cogs, gp, gm, varCost, fixedPerUnit, netPerUnit, netTotal, nm, breakeven, rev: exVat * units, exVat };
 }
 
 let chart;
@@ -388,6 +396,11 @@ function update() {
   const units = parseInt(document.getElementById('units').value);
   const pkg = parseInt(document.getElementById('pkg').value);
   const ship = parseInt(document.getElementById('ship').value);
+  const vatReg = document.getElementById('vat-toggle').checked;
+
+  document.getElementById('vat-note').textContent = vatReg
+    ? 'Registered — ex-VAT revenue: £' + Math.round(rrp / 1.2).toLocaleString('en-GB')
+    : 'Not registered — RRP is your full revenue';
 
   document.getElementById('rrp-out').textContent = '£' + rrp;
   document.getElementById('prod-out').textContent = '£' + prod;
@@ -396,10 +409,10 @@ function update() {
   document.getElementById('pkg-out').textContent = '£' + pkg;
   document.getElementById('ship-out').textContent = '£' + ship;
 
-  const r = calc(rrp, prod, mkt, units, pkg, ship);
+  const r = calc(rrp, prod, mkt, units, pkg, ship, vatReg);
 
   document.getElementById('m-rev').textContent = fmt(r.rev);
-  document.getElementById('m-units-sub').textContent = units + ' units';
+  document.getElementById('m-units-sub').textContent = vatReg ? units + ' units (ex-VAT)' : units + ' units';
   document.getElementById('m-gm').textContent = fmtPct(r.gm);
   document.getElementById('m-net').textContent = fmt(r.netTotal);
   document.getElementById('m-nm').textContent = 'net margin ' + fmtPct(r.nm);
@@ -444,8 +457,8 @@ function update() {
   }).join('') + `<div class="breakdown-row"><span class="breakdown-label">Net profit / unit</span><span>${fmt(r.netPerUnit)}</span></div>`;
 
   const vols = [20,40,60,80,100,150,200,250,350,500];
-  const netLine = vols.map(u => Math.round(calc(rrp, prod, mkt, u, pkg, ship).netTotal));
-  const revLine = vols.map(u => Math.round(rrp * u));
+  const netLine = vols.map(u => Math.round(calc(rrp, prod, mkt, u, pkg, ship, vatReg).netTotal));
+  const revLine = vols.map(u => Math.round(calc(rrp, prod, mkt, u, pkg, ship, vatReg).exVat * u));
 
   if (chart) {
     chart.data.datasets[0].data = netLine;
@@ -455,6 +468,7 @@ function update() {
 }
 
 document.querySelectorAll('input[type=range]').forEach(el => el.addEventListener('input', update));
+  document.getElementById('vat-toggle').addEventListener('change', update);
 
 window.addEventListener('load', () => {
   const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -462,9 +476,9 @@ window.addEventListener('load', () => {
   const tickColor = isDark ? '#6b6b67' : '#888780';
 
   const vols = [20,40,60,80,100,150,200,250,350,500];
-  const rrp = 750, prod = 250, mkt = 50, pkg = 30, ship = 40;
-  const netLine = vols.map(u => Math.round(calc(rrp, prod, mkt, u, pkg, ship).netTotal));
-  const revLine = vols.map(u => Math.round(rrp * u));
+  const rrp = 750, prod = 250, mkt = 50, pkg = 30, ship = 40, vatReg = false;
+  const netLine = vols.map(u => Math.round(calc(rrp, prod, mkt, u, pkg, ship, vatReg).netTotal));
+  const revLine = vols.map(u => Math.round(calc(rrp, prod, mkt, u, pkg, ship, vatReg).exVat * u));
 
   const ctx = document.getElementById('profitChart').getContext('2d');
   chart = new Chart(ctx, {
