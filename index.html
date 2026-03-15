@@ -9,41 +9,23 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #ffffff;
-    --bg-secondary: #f7f6f2;
-    --bg-card: #ffffff;
-    --text-primary: #1a1a1a;
-    --text-secondary: #6b6b67;
-    --text-tertiary: #9e9d99;
-    --border: rgba(0,0,0,0.08);
-    --border-mid: rgba(0,0,0,0.14);
-    --gold: #378ADD;
-    --gold-light: #e6f1fb;
-    --gold-mid: #b5d4f4;
-    --blue: #378add;
-    --blue-light: #e6f1fb;
-    --warning-bg: #fef9ec;
-    --warning-text: #92620a;
+    --bg: #111111;
+    --bg-secondary: #1c1c1c;
+    --bg-card: #181818;
+    --text-primary: #f0ede6;
+    --text-secondary: #9e9d99;
+    --text-tertiary: #5a5a57;
+    --border: rgba(255,255,255,0.07);
+    --border-mid: rgba(255,255,255,0.12);
+    --gold: #60A5FA;
+    --gold-light: #0d1e30;
+    --gold-mid: #162b42;
+    --blue: #60A5FA;
+    --blue-light: #0d1e30;
+    --warning-bg: #2a2010;
+    --warning-text: #d4920f;
     --radius-md: 8px;
     --radius-lg: 12px;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #1a1a1a;
-      --bg-secondary: #252522;
-      --bg-card: #202020;
-      --text-primary: #f0ede6;
-      --text-secondary: #9e9d99;
-      --text-tertiary: #6b6b67;
-      --border: rgba(255,255,255,0.08);
-      --border-mid: rgba(255,255,255,0.14);
-      --gold-light: #0d1e30;
-      --gold-mid: #162b42;
-      --blue-light: #0d1e30;
-      --warning-bg: #2a2010;
-      --warning-text: #d4920f;
-    }
   }
 
   body {
@@ -86,7 +68,7 @@
     letter-spacing: 0.06em;
   }
 
-  .main { max-width: 960px; margin: 0 auto; padding: 32px 24px 64px; }
+  .main { max-width: 1400px; margin: 0 auto; padding: 32px 40px 64px; }
 
   .section-label {
     font-size: 10px;
@@ -217,7 +199,7 @@
   .breakdown-row:last-child { border-bottom: none; font-weight: 500; }
   .breakdown-label { color: var(--text-secondary); white-space: nowrap; }
   .bar-bg { background: var(--border); border-radius: 2px; height: 4px; flex: 1; min-width: 30px; }
-  .bar-fill { height: 4px; border-radius: 2px; background: #378add; }
+  .bar-fill { height: 4px; border-radius: 2px; background: #60A5FA; }
 
   .gm-display {
     display: flex;
@@ -252,22 +234,57 @@
     padding-top: 16px;
     border-top: 0.5px solid var(--border);
   }
+
+  .tab-nav { display: flex; gap: 0; border-bottom: 0.5px solid var(--border); margin-bottom: 32px; }
+  .tab-btn { background: none; border: none; border-bottom: 2px solid transparent; padding: 12px 20px; font-size: 13px; font-weight: 500; color: var(--text-tertiary); cursor: pointer; letter-spacing: 0.03em; margin-bottom: -1px; }
+  .tab-btn.active { color: var(--text-primary); border-bottom-color: var(--gold); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  .fw-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; }
+  .fw-table th { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); padding: 8px 12px; text-align: right; border-bottom: 0.5px solid var(--border); }
+  .fw-table th:first-child { text-align: left; }
+  .fw-table td { padding: 10px 12px; text-align: right; border-bottom: 0.5px solid var(--border); color: var(--text-primary); }
+  .fw-table td:first-child { text-align: left; color: var(--text-secondary); font-weight: 500; }
+  .fw-table tr.highlight td { background: var(--gold-light); font-weight: 500; }
+  .fw-table tr.flywheel-on td { color: var(--gold); font-weight: 500; }
+  .fw-controls { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 32px; }
+  .sunk-badge { display: inline-block; font-size: 11px; color: var(--text-tertiary); background: var(--bg-secondary); border-radius: var(--radius-md); padding: 4px 10px; margin-left: 8px; }
+
+  .fw-controls { background: var(--bg-secondary); border-radius: var(--radius-lg); padding: 20px 24px; margin-bottom: 28px; }
+  .fw-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .fw-table th { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-tertiary); padding: 8px 12px; border-bottom: 0.5px solid var(--border); text-align: right; }
+  .fw-table td { padding: 10px 12px; text-align: right; border-bottom: 0.5px solid var(--border); color: var(--text-primary); }
+  .fw-table td:first-child { text-align: left; color: var(--text-secondary); font-weight: 500; }
+  .fw-table tr.flywheel-on td { color: var(--gold); }
+  .tab-nav { display: flex; border-bottom: 0.5px solid var(--border); margin-bottom: 28px; }
+  .tab-btn { background: none; border: none; border-bottom: 2px solid transparent; padding: 12px 20px; font-size: 13px; font-weight: 500; color: var(--text-tertiary); cursor: pointer; margin-bottom: -1px; }
+  .tab-btn.active { color: var(--text-primary); border-bottom-color: var(--gold); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
 </style>
 </head>
 <body>
 
 <div class="main">
 
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('margins')">Margins</button>
+    <button class="tab-btn" onclick="switchTab('flywheel')">Flywheel — Bracelets</button>
+    <button class="tab-btn" onclick="switchTab('rings')">Flywheel — Rings</button>
+  </nav>
+
+  <div id="tab-margins" class="tab-panel active">
   <div class="controls">
     <p class="section-label" style="margin-bottom:16px;">inputs — drag to update</p>
     <div class="control-grid">
       <div class="control">
         <label>RRP <span id="rrp-out">£750</span></label>
-        <input type="range" min="400" max="1200" step="50" value="750" id="rrp">
+        <input type="range" min="50" max="1200" step="25" value="750" id="rrp">
       </div>
       <div class="control">
         <label>Production cost <span id="prod-out">£250</span></label>
-        <input type="range" min="80" max="400" step="10" value="250" id="prod">
+        <input type="range" min="10" max="400" step="5" value="250" id="prod">
       </div>
       <div class="control">
         <label>Marketing / unit <span id="mkt-out">£50</span></label>
@@ -323,7 +340,7 @@
   <div class="chart-section">
     <p class="section-label">profit curve — volume scenarios</p>
     <div class="chart-legend">
-      <span class="legend-item"><span class="legend-dot" style="background:#378add;"></span>Net profit</span>
+      <span class="legend-item"><span class="legend-dot" style="background:#60A5FA;"></span>Net profit</span>
       <span class="legend-item"><span class="legend-dot" style="background:#b4b2a9; border-radius:0;"></span>Revenue</span>
     </div>
     <div class="chart-wrap">
@@ -361,6 +378,200 @@
       </div>
     </div>
   </div>
+
+
+
+
+
+  </div><!-- end tab-margins -->
+
+  <div id="tab-flywheel" class="tab-panel">
+
+    <div class="fw-controls">
+      <p class="section-label" style="margin-bottom:16px;">flywheel inputs</p>
+      <div class="control-grid">
+        <div class="control">
+          <label>Units in cycle 1 <span id="fw-units-out">90</span></label>
+          <input type="range" min="10" max="300" step="5" value="90" id="fw-units">
+        </div>
+        <div class="control">
+          <label>RRP <span id="fw-rrp-out">£750</span></label>
+          <input type="range" min="50" max="1200" step="25" value="750" id="fw-rrp">
+        </div>
+        <div class="control">
+          <label>Production cost <span id="fw-prod-out">£250</span></label>
+          <input type="range" min="10" max="400" step="5" value="250" id="fw-prod">
+        </div>
+        <div class="control">
+          <label>Packaging + hallmark + freight <span id="fw-pkg-out">£30</span></label>
+          <input type="range" min="5" max="80" step="1" value="30" id="fw-pkg">
+        </div>
+        <div class="control">
+          <label>Shipping + payment <span id="fw-ship-out">£40</span></label>
+          <input type="range" min="10" max="150" step="1" value="40" id="fw-ship">
+        </div>
+        <div class="control">
+          <label>% of profit to reorder stock <span id="fw-reorder-out">70%</span></label>
+          <input type="range" min="10" max="90" step="5" value="70" id="fw-reorder">
+          <p style="font-size:11px; color:var(--text-tertiary); margin-top:6px;">Covers next cycle production cost</p>
+        </div>
+        <div class="control">
+          <label>% of profit to marketing <span id="fw-reinvest-out">20%</span></label>
+          <input type="range" min="5" max="80" step="5" value="20" id="fw-reinvest">
+          <p style="font-size:11px; color:var(--text-tertiary); margin-top:6px;">Remaining % is kept as retained profit</p>
+        </div>
+        <div class="control">
+          <label>Marketing cost per extra unit <span id="fw-conv-out">£50</span></label>
+          <input type="range" min="10" max="200" step="5" value="50" id="fw-conv">
+          <p style="font-size:11px; color:var(--text-tertiary); margin-top:6px;">How much marketing spend acquires one additional sale</p>
+        </div>
+      </div>
+      <p style="font-size:11px; color:var(--text-tertiary); margin-top:14px;">Cycle 1 uses full gross profit (day-one investment already spent). From cycle 2 onwards, net profit splits into reorder, marketing, and retained. Cycles marked ↻ are funded from prior cycle profit.</p>
+    </div>
+
+    <p class="section-label">6-cycle projection</p>
+    <div id="fw-breakeven-callout" style="font-size:12px; border-radius:var(--radius-md); padding:10px 14px; margin-bottom:16px; border-left:3px solid #888;"></div>
+    <div style="overflow-x:auto; margin-bottom:28px;">
+      <table class="fw-table" id="fw-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Cycle</th>
+            <th>Units sold</th>
+            <th>Revenue</th>
+            <th>Net profit</th>
+            <th>To reorder</th>
+            <th>To marketing</th>
+            <th>Retained</th>
+            <th>Cumulative profit</th>
+          </tr>
+        </thead>
+        <tbody id="fw-tbody"><tr><td colspan="7" style="text-align:center; color:var(--text-tertiary); padding:20px;">Loading…</td></tr></tbody>
+      </table>
+    </div>
+
+    <p class="section-label">key metrics</p>
+    <div class="metric-grid" style="margin-bottom:28px;">
+      <div class="metric">
+        <p class="metric-label">Flywheel starts</p>
+        <p class="metric-value" id="fw-m-cycle">—</p>
+        <p class="metric-sub">marketing from profit</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Cumulative profit (cycle 6)</p>
+        <p class="metric-value" id="fw-m-cumprofit">—</p>
+        <p class="metric-sub">after all costs</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Total units (6 cycles)</p>
+        <p class="metric-value" id="fw-m-units6">—</p>
+        <p class="metric-sub">cumulative</p>
+      </div>
+    </div>
+
+    <p class="section-label">cumulative profit by cycle</p>
+    <div style="position:relative; width:100%; height:220px; margin-bottom:32px;">
+      <canvas id="fw-chart"></canvas>
+    </div>
+
+
+  </div><!-- end tab-flywheel -->
+
+  <div id="tab-rings" class="tab-panel">
+
+    <div class="fw-controls">
+      <p class="section-label" style="margin-bottom:16px;">ring flywheel inputs</p>
+      <div class="control-grid">
+        <div class="control">
+          <label>Units in cycle 1 <span id="rw-units-out">90</span></label>
+          <input type="range" min="10" max="300" step="5" value="90" id="rw-units">
+        </div>
+        <div class="control">
+          <label>RRP <span id="rw-rrp-out">£300</span></label>
+          <input type="range" min="100" max="600" step="25" value="300" id="rw-rrp">
+        </div>
+        <div class="control">
+          <label>Production cost <span id="rw-prod-out">£50</span></label>
+          <input type="range" min="20" max="200" step="5" value="50" id="rw-prod">
+        </div>
+        <div class="control">
+          <label>Packaging + hallmark + freight <span id="rw-pkg-out">£10</span></label>
+          <input type="range" min="2" max="50" step="1" value="10" id="rw-pkg">
+        </div>
+        <div class="control">
+          <label>Shipping + payment <span id="rw-ship-out">£20</span></label>
+          <input type="range" min="5" max="100" step="1" value="20" id="rw-ship">
+        </div>
+        <div class="control">
+          <label>% to reorder stock <span id="rw-reorder-out">70%</span></label>
+          <input type="range" min="10" max="90" step="5" value="70" id="rw-reorder">
+        </div>
+        <div class="control">
+          <label>% to marketing <span id="rw-mkt-out">10%</span></label>
+          <input type="range" min="5" max="80" step="5" value="10" id="rw-mkt">
+        </div>
+        <div class="control">
+          <label>Marketing cost per extra unit <span id="rw-conv-out">£30</span></label>
+          <input type="range" min="10" max="150" step="5" value="30" id="rw-conv">
+        </div>
+      </div>
+      <p style="font-size:11px; color:var(--text-tertiary); margin-top:14px;">Rings use same fixed overheads as bracelets — shared infrastructure. Cycle 1 uses full revenue (sunk cost already spent).</p>
+    </div>
+
+    <div id="rw-breakeven-callout" style="font-size:12px; border-radius:var(--radius-md); padding:10px 14px; margin-bottom:16px; border-left:3px solid #888;"></div>
+
+    <p class="section-label">6-cycle projection</p>
+    <div style="overflow-x:auto; margin-bottom:28px;">
+      <table class="fw-table">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Cycle</th>
+            <th>Units sold</th>
+            <th>Revenue</th>
+            <th>Net profit</th>
+            <th>To reorder</th>
+            <th>To marketing</th>
+            <th>Retained</th>
+            <th>Cumulative profit</th>
+          </tr>
+        </thead>
+        <tbody id="rw-tbody"><tr><td colspan="10" style="text-align:center; color:var(--text-tertiary); padding:20px;">Loading…</td></tr></tbody>
+      </table>
+    </div>
+
+    <p class="section-label">key metrics</p>
+    <div class="metric-grid" style="margin-bottom:28px;">
+      <div class="metric">
+        <p class="metric-label">Flywheel starts</p>
+        <p class="metric-value">Cycle 2</p>
+        <p class="metric-sub">marketing from profit</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Cumulative profit (cycle 6)</p>
+        <p class="metric-value" id="rw-m-cumprofit">—</p>
+        <p class="metric-sub">after all costs</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Total units (6 cycles)</p>
+        <p class="metric-value" id="rw-m-units6">—</p>
+        <p class="metric-sub">cumulative</p>
+      </div>
+      <div class="metric">
+        <p class="metric-label">Cumulative retained</p>
+        <p class="metric-value" id="rw-m-retained">—</p>
+        <p class="metric-sub">cash kept</p>
+      </div>
+    </div>
+
+    <p class="section-label">cumulative profit by cycle</p>
+    <div style="position:relative; width:100%; height:220px; margin-bottom:32px;">
+      <canvas id="rw-chart"></canvas>
+    </div>
+
+
+  </div><!-- end tab-rings -->
+
+
+
 
 
 
@@ -471,9 +682,8 @@ document.querySelectorAll('input[type=range]').forEach(el => el.addEventListener
   document.getElementById('vat-toggle').addEventListener('change', update);
 
 window.addEventListener('load', () => {
-  const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const gridColor = isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)';
-  const tickColor = isDark ? '#6b6b67' : '#888780';
+  const gridColor = 'rgba(255,255,255,0.05)';
+  const tickColor = '#6b6b67';
 
   const vols = [20,40,60,80,100,150,200,250,350,500];
   const rrp = 750, prod = 250, mkt = 50, pkg = 30, ship = 40, vatReg = false;
@@ -489,12 +699,12 @@ window.addEventListener('load', () => {
         {
           label: 'Net profit',
           data: netLine,
-          borderColor: '#378add',
+          borderColor: '#60A5FA',
           backgroundColor: 'rgba(55,138,221,0.07)',
           fill: true,
           tension: 0.4,
           pointRadius: 3,
-          pointBackgroundColor: '#378add',
+          pointBackgroundColor: '#60A5FA',
           borderWidth: 2,
         },
         {
@@ -540,5 +750,284 @@ window.addEventListener('load', () => {
   update();
 });
 </script>
+
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelector('[onclick="switchTab(\''+name+'\')"]').classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  if (name === 'flywheel') setTimeout(updateFlywheel, 50);
+  if (name === 'rings') setTimeout(updateRings, 50);
+}
+
+let fwChart;
+
+function fmtFW(n) { return '£' + Math.round(n).toLocaleString('en-GB'); }
+
+function updateFlywheel() {
+  const baseUnits = parseInt(document.getElementById('fw-units').value);
+  const reorderPct = parseInt(document.getElementById('fw-reorder').value) / 100;
+  const mktPct = parseInt(document.getElementById('fw-reinvest').value) / 100;
+  const convCost = parseInt(document.getElementById('fw-conv').value);
+
+  document.getElementById('fw-units-out').textContent = baseUnits;
+  document.getElementById('fw-reorder-out').textContent = Math.round(reorderPct * 100) + '%';
+  document.getElementById('fw-reinvest-out').textContent = Math.round(mktPct * 100) + '%';
+  document.getElementById('fw-conv-out').textContent = '£' + convCost + ' / unit';
+
+  // Use flywheel-specific sliders if present, else fall back to margins tab
+  const rrp = parseInt(document.getElementById('fw-rrp').value);
+  const prodCost = parseInt(document.getElementById('fw-prod').value);
+  const mktCost = parseInt(document.getElementById('mkt').value);
+  const pkg = parseInt(document.getElementById('fw-pkg').value);
+  const ship = parseInt(document.getElementById('fw-ship').value);
+  const vatReg = document.getElementById('vat-toggle').checked;
+
+  document.getElementById('fw-rrp-out').textContent = '£' + rrp;
+  document.getElementById('fw-prod-out').textContent = '£' + prodCost;
+  document.getElementById('fw-pkg-out').textContent = '£' + pkg;
+  document.getElementById('fw-ship-out').textContent = '£' + ship;
+
+  const exVat = vatReg ? rrp / 1.2 : rrp;
+  const netPerUnit = (exVat - prodCost - pkg) - ship - mktCost;
+  const FIXED_ANNUAL = (40 + 98 + 150) * 12 + 680 + 5600;
+  const fixedPerCycle = FIXED_ANNUAL / 6;
+
+  // Cycle 1: full revenue available — production + design already sunk
+  // Split full revenue into reorder % + marketing % + retained %
+  // Cycle 2+: split net profit (revenue minus all costs including fixed)
+  let nextUnits = baseUnits;
+  let runningProfit = 0;
+  let totalUnits = 0;
+  const cycles = [];
+  const labels = [];
+  const profitLine = [];
+
+  for (let c = 1; c <= 6; c++) {
+    const units = nextUnits;
+    const revenue = exVat * units;
+    let pool, netProfit;
+
+    if (c === 1) {
+      pool = revenue; // full revenue — sunk cost already spent
+      netProfit = revenue;
+    } else {
+      pool = (netPerUnit * units) - fixedPerCycle;
+      netProfit = pool;
+    }
+
+    const toReorder = Math.max(0, pool * reorderPct);
+    const toMkt = Math.max(0, pool * mktPct);
+    const retained = pool - toReorder - toMkt;
+    const mktCouldSell = Math.floor(toMkt / convCost);
+    const nextCycleUnits = Math.max(1, Math.floor(toReorder / prodCost));
+
+    runningProfit += netProfit;
+    totalUnits += units;
+
+    const minReorderPct = pool > 0 ? Math.min(100, (units * prodCost) / pool * 100) : 100;
+    const cumRetained = cycles.reduce(function(s, r) { return s + r.retained; }, 0) + retained;
+    cycles.push({ c, units, revenue, netProfit, toReorder, toMkt, retained, cumProfit: runningProfit, nextCycleUnits, mktCouldSell, minReorderPct, cumUnits: totalUnits, cumRetained });
+    labels.push('Cycle ' + c);
+    profitLine.push(Math.round(runningProfit));
+
+    nextUnits = nextCycleUnits;
+  }
+
+  const tbody = document.getElementById('fw-tbody');
+  tbody.innerHTML = cycles.map(function(r, i) {
+    const nextLabel = i < cycles.length - 1 ? r.nextCycleUnits + ' units' : '—';
+    const isC1 = r.c === 1;
+    return '<tr class="' + (r.c > 1 ? 'flywheel-on' : '') + '">' +
+      '<td>Cycle ' + r.c + (r.c > 1 ? ' ↻' : '') + '</td>' +
+      '<td>' + r.units + '<span style="font-size:11px;color:var(--text-tertiary);margin-left:5px;">(' + r.cumUnits + ')</span></td>' +
+      '<td>' + fmtFW(r.revenue) + (isC1 ? '<span style="font-size:10px;color:var(--text-tertiary);margin-left:4px;">full</span>' : '') + '</td>' +
+      '<td>' + fmtFW(r.netProfit) + '</td>' +
+      '<td>' + fmtFW(r.toReorder) + ' → ' + nextLabel + '</td>' +
+      '<td>' + fmtFW(r.toMkt) + '<span style="font-size:11px;color:var(--text-tertiary);margin-left:4px;">+' + r.mktCouldSell + ' units</span></td>' +
+      '<td>' + fmtFW(r.retained) + '<span style="font-size:11px;color:var(--text-tertiary);margin-left:5px;">(' + fmtFW(r.cumRetained) + ')</span></td>' +
+      '<td>' + fmtFW(r.cumProfit) + '</td>' +
+      '</tr>';
+  }).join('');
+
+  // Breakeven reorder callout
+  const avgMinReorder = cycles.slice(1).reduce(function(s, r) { return s + r.minReorderPct; }, 0) / (cycles.length - 1);
+  const isAbove = reorderPct * 100 >= avgMinReorder;
+  const callout = document.getElementById('fw-breakeven-callout');
+  callout.style.background = isAbove ? 'rgba(74,158,92,0.12)' : 'rgba(224,85,85,0.12)';
+  callout.style.borderLeftColor = isAbove ? '#4a9e5c' : '#e05555';
+  callout.style.color = isAbove ? '#6fcf8a' : '#e07070';
+  callout.innerHTML = isAbove
+    ? '<strong>Flywheel is growing.</strong> Your reorder % (' + Math.round(reorderPct*100) + '%) is above the ~' + Math.round(avgMinReorder) + '% minimum needed to maintain volume each cycle.'
+    : '<strong>Flywheel is shrinking.</strong> You need at least ~' + Math.round(avgMinReorder) + '% to reorder to maintain volume. Currently at ' + Math.round(reorderPct*100) + '% — raise the reorder slider or reduce production cost.';
+
+  document.getElementById('fw-m-cycle').textContent = 'Cycle 2';
+  document.getElementById('fw-m-cumprofit').textContent = fmtFW(runningProfit);
+  document.getElementById('fw-m-units6').textContent = totalUnits.toLocaleString('en-GB');
+
+  const gridColor = 'rgba(255,255,255,0.05)';
+  const tickColor = '#6b6b67';
+
+  if (fwChart) {
+    fwChart.data.labels = labels;
+    fwChart.data.datasets[0].data = profitLine;
+    fwChart.update('none');
+  } else {
+    const ctx = document.getElementById('fw-chart').getContext('2d');
+    fwChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{ label: 'Cumulative profit', data: profitLine, backgroundColor: '#60A5FA', borderRadius: 4, borderSkipped: false }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx) { return 'Cumulative: £' + Math.round(ctx.parsed.y).toLocaleString('en-GB'); }}}},
+        scales: {
+          x: { grid: { color: gridColor }, ticks: { font: { size: 11 }, color: tickColor }},
+          y: { grid: { color: gridColor }, ticks: { font: { size: 11 }, color: tickColor, callback: function(v) { return '£' + (Math.abs(v) >= 1000 ? Math.round(v/1000)+'k' : v); }}}
+        }
+      }
+    });
+  }
+}
+
+
+document.querySelectorAll('#fw-units, #fw-rrp, #fw-prod, #fw-pkg, #fw-ship, #fw-reorder, #fw-reinvest, #fw-conv').forEach(el => {
+  el.addEventListener('input', updateFlywheel);
+});
+</script>
+
+
+<script>
+let rwChart;
+
+function updateRings() {
+  const baseUnits = parseInt(document.getElementById('rw-units').value);
+  const rrp = parseInt(document.getElementById('rw-rrp').value);
+  const prodCost = parseInt(document.getElementById('rw-prod').value);
+  const reorderPct = parseInt(document.getElementById('rw-reorder').value) / 100;
+  const mktPct = parseInt(document.getElementById('rw-mkt').value) / 100;
+  const convCost = parseInt(document.getElementById('rw-conv').value);
+
+  document.getElementById('rw-units-out').textContent = baseUnits;
+  document.getElementById('rw-rrp-out').textContent = '£' + rrp;
+  document.getElementById('rw-prod-out').textContent = '£' + prodCost;
+  document.getElementById('rw-reorder-out').textContent = Math.round(reorderPct * 100) + '%';
+  document.getElementById('rw-mkt-out').textContent = Math.round(mktPct * 100) + '%';
+  document.getElementById('rw-conv-out').textContent = '£' + convCost;
+
+  const FIXED_ANNUAL = (40 + 98 + 150) * 12 + 680 + 5600;
+  const fixedPerCycle = FIXED_ANNUAL / 6;
+  const pkg = parseInt(document.getElementById('rw-pkg').value);
+  const ship = parseInt(document.getElementById('rw-ship').value);
+  const mktCost = 20;
+  document.getElementById('rw-pkg-out').textContent = '£' + pkg;
+  document.getElementById('rw-ship-out').textContent = '£' + ship;
+  const netPerUnit = (rrp - prodCost - pkg) - ship - mktCost;
+
+  let nextUnits = baseUnits;
+  let runningProfit = 0;
+  let totalUnits = 0;
+  let totalRetained = 0;
+  const cycles = [];
+  const labels = [];
+  const profitLine = [];
+
+  for (let c = 1; c <= 6; c++) {
+    const units = nextUnits;
+    const revenue = rrp * units;
+    let pool;
+    if (c === 1) {
+      pool = revenue;
+    } else {
+      pool = (netPerUnit * units) - fixedPerCycle;
+    }
+
+    const toReorder = Math.max(0, pool * reorderPct);
+    const toMkt = Math.max(0, pool * mktPct);
+    const retained = pool - toReorder - toMkt;
+    const mktCouldSell = Math.floor(toMkt / convCost);
+    const nextCycleUnits = Math.max(1, Math.floor(toReorder / prodCost));
+    const minReorderPct = pool > 0 ? Math.min(100, (units * prodCost) / pool * 100) : 100;
+
+    runningProfit += pool;
+    totalUnits += units;
+    totalRetained += retained;
+
+    totalRetained += retained;
+    cycles.push({ c, units, revenue, pool, toReorder, toMkt, retained, cumProfit: runningProfit, nextCycleUnits, mktCouldSell, minReorderPct, cumUnits: totalUnits, cumRetained: totalRetained });
+    labels.push('Cycle ' + c);
+    profitLine.push(Math.round(runningProfit));
+
+    nextUnits = nextCycleUnits;
+  }
+
+  // Breakeven callout
+  const avgMin = cycles.slice(1).reduce(function(s,r){ return s + r.minReorderPct; }, 0) / (cycles.length - 1);
+  const isAbove = reorderPct * 100 >= avgMin;
+  const callout = document.getElementById('rw-breakeven-callout');
+  callout.style.background = isAbove ? 'rgba(74,158,92,0.12)' : 'rgba(224,85,85,0.12)';
+  callout.style.borderLeftColor = isAbove ? '#4a9e5c' : '#e05555';
+  callout.style.color = isAbove ? '#6fcf8a' : '#e07070';
+  callout.innerHTML = isAbove
+    ? '<strong>Flywheel is growing.</strong> Your reorder % (' + Math.round(reorderPct*100) + '%) is above the ~' + Math.round(avgMin) + '% minimum needed to maintain volume each cycle.'
+    : '<strong>Flywheel is shrinking.</strong> You need at least ~' + Math.round(avgMin) + '% to reorder to maintain volume. Currently at ' + Math.round(reorderPct*100) + '%.';
+
+  // Render table
+  const tbody = document.getElementById('rw-tbody');
+  tbody.innerHTML = cycles.map(function(r, i) {
+    const nextLabel = i < cycles.length - 1 ? r.nextCycleUnits + ' units' : '—';
+    return '<tr class="' + (r.c > 1 ? 'flywheel-on' : '') + '">' +
+      '<td>Cycle ' + r.c + (r.c > 1 ? ' ↻' : '') + '</td>' +
+      '<td>' + r.units + '<span style="font-size:11px;color:var(--text-tertiary);margin-left:5px;">(' + r.cumUnits + ')</span></td>' +
+      '<td>' + fmtFW(r.revenue) + (r.c === 1 ? '<span style="font-size:10px;color:var(--text-tertiary);margin-left:4px;">full</span>' : '') + '</td>' +
+      '<td>' + fmtFW(r.pool) + '</td>' +
+      '<td>' + fmtFW(r.toReorder) + ' → ' + nextLabel + '</td>' +
+      '<td>' + fmtFW(r.toMkt) + '<span style="font-size:11px;color:var(--text-tertiary);margin-left:4px;">+' + r.mktCouldSell + ' units</span></td>' +
+      '<td>' + fmtFW(r.retained) + '<span style="font-size:11px;color:var(--text-tertiary);margin-left:5px;">(' + fmtFW(r.cumRetained) + ')</span></td>' +
+      '<td>' + fmtFW(r.cumProfit) + '</td>' +
+      '</tr>';
+  }).join('');
+
+  document.getElementById('rw-m-cumprofit').textContent = fmtFW(runningProfit);
+  document.getElementById('rw-m-units6').textContent = totalUnits.toLocaleString('en-GB');
+  document.getElementById('rw-m-retained').textContent = fmtFW(totalRetained);
+
+  const gridColor = 'rgba(255,255,255,0.05)';
+  const tickColor = '#6b6b67';
+
+  if (rwChart) {
+    rwChart.data.labels = labels;
+    rwChart.data.datasets[0].data = profitLine;
+    rwChart.update('none');
+  } else {
+    const ctx = document.getElementById('rw-chart').getContext('2d');
+    rwChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{ label: 'Cumulative profit', data: profitLine, backgroundColor: '#60A5FA', borderRadius: 4, borderSkipped: false }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: function(ctx) { return 'Cumulative: £' + Math.round(ctx.parsed.y).toLocaleString('en-GB'); }}}},
+        scales: {
+          x: { grid: { color: gridColor }, ticks: { font: { size: 11 }, color: tickColor }},
+          y: { grid: { color: gridColor }, ticks: { font: { size: 11 }, color: tickColor, callback: function(v) { return '£' + (Math.abs(v) >= 1000 ? Math.round(v/1000)+'k' : v); }}}
+        }
+      }
+    });
+  }
+}
+
+document.querySelectorAll('#rw-units, #rw-rrp, #rw-prod, #rw-pkg, #rw-ship, #rw-reorder, #rw-mkt, #rw-conv').forEach(function(el) {
+  el.addEventListener('input', updateRings);
+});
+</script>
+
+
+
 </body>
 </html>
